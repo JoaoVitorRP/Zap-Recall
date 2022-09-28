@@ -1,14 +1,41 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-export default function Buttons() {
+export default function Buttons(props) {
+  const {
+    buttonsDisable,
+    colors,
+    setColors,
+    clicked,
+    completed,
+    setCompleted,
+  } = props;
+
+  const [total, setTotal] = useState(0);
+
+  function textColor(color) {
+    let colorsCopy = [...colors];
+    colorsCopy[clicked] = color;
+    setColors(colorsCopy);
+    const clickedCopy = [...completed, clicked];
+    setCompleted(clickedCopy);
+    setTotal(total + 1);
+  }
+
   return (
     <Footer>
       <ButtonDiv>
-        <Red>Não lembrei</Red>
-        <Yellow>Quase não lembrei</Yellow>
-        <Green>Zap!</Green>
+        <Red onClick={() => textColor("#ff3030")} disabled={buttonsDisable}>
+          Não lembrei
+        </Red>
+        <Yellow onClick={() => textColor("#ff922e")} disabled={buttonsDisable}>
+          Quase não lembrei
+        </Yellow>
+        <Green onClick={() => textColor("#2fbe34")} disabled={buttonsDisable}>
+          Zap!
+        </Green>
       </ButtonDiv>
-      0/4 CONCLUÍDOS
+      {total}/8 CONCLUÍDOS
     </Footer>
   );
 }
@@ -47,11 +74,11 @@ const GeneralButton = styled.button`
   margin: 4px;
   padding: 0px 8px;
 
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
 
   color: #ffffff;
   text-align: center;
-  font-family: 'Recursive', sans-serif;
+  font-family: "Recursive", sans-serif;
   font-weight: 400;
 `;
 
