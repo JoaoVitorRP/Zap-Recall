@@ -51,6 +51,7 @@ const GeneralButton = styled.button`
 
   color: #ffffff;
   text-align: center;
+  font-family: 'Recursive', sans-serif;
   font-weight: 400;
 `;
 

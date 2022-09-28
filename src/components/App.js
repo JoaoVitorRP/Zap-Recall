@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import Cards from "./Cards";
+import CardList from "./CardList";
 import Buttons from "./Buttons";
 
 import Reset from "../Reset";
@@ -11,7 +11,7 @@ export default function App() {
       <Reset />
       <GlobalStyle />
       <Logo />
-      <Cards />
+      <CardList />
       <Buttons />
     </>
   );

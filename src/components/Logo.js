@@ -30,5 +30,5 @@ const Header = styled.div`
 const Img = styled.img`
   width: 52px;
   height: 60px;
-  margin-right: 12px;
+  margin-right: 25px;
 `;
