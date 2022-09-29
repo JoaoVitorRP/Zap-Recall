@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { useState } from "react";
+
 import play from "../assets/img/play-outline-icon.svg";
 import arrows from "../assets/img/Vector.svg";
 import correct from "../assets/img/checkmark-circle-icon.svg";
 import almost from "../assets/img/help-circle-icon.svg";
 import wrong from "../assets/img/close-circle-icon.svg";
-import { useState } from "react";
 
 export default function Card(props) {
   const {
@@ -13,25 +14,25 @@ export default function Card(props) {
     disabled,
     setDisabled,
     setButtonsDisable,
-    clicked,
-    setClicked,
+    clickedIndex,
+    setClickedIndex,
     completed,
   } = props;
 
-  const [flippedStatus, setFlippedStatus] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [cardText, setCardText] = useState();
 
   function revealQuestion(i, text) {
-    setClicked(i);
+    setClickedIndex(i);
     setDisabled(true);
-    setFlippedStatus(true);
+    setIsFlipped(true);
     setCardText(text);
     setButtonsDisable(true);
   }
 
   function revealAnswer(i, text) {
     setDisabled(false);
-    setFlippedStatus(false);
+    setIsFlipped(false);
     setCardText(text);
     setButtonsDisable(false);
   }
@@ -39,25 +40,26 @@ export default function Card(props) {
   return (
     <>
       <Flashcard
-        key={index}
-        isClicked={clicked === index ? true : false}
+        isClicked={clickedIndex === index ? true : false}
         isCompleted={completed.includes(index) ? true : false}
+        data-identifier="flashcard"
       >
-        {clicked === index ? `${cardText}` : `Pergunta ${index + 1}`}
+        {clickedIndex === index ? `${cardText}` : `Pergunta ${index + 1}`}
         <Button
           onClick={() => revealQuestion(index, c.question)}
           disabled={disabled}
+          data-identifier="flashcard-show-btn"
         >
           <PlayImg
-            isClicked={clicked === index ? true : false}
+            isClicked={clickedIndex === index ? true : false}
             src={play}
           ></PlayImg>
         </Button>
         <ArrowsImg
-          isFlipped={flippedStatus}
-          isClicked={clicked === index ? true : false}
+          isFlipped={isFlipped}
           src={arrows}
           onClick={() => revealAnswer(index, c.answer)}
+          data-identifier="flashcard-turn-btn"
         ></ArrowsImg>
       </Flashcard>
       <CompletedCard
@@ -73,6 +75,7 @@ export default function Card(props) {
               ? `${almost}`
               : `${wrong}`
           }
+          data-identifier="flashcard-status"
         ></Symbol>
       </CompletedCard>
     </>

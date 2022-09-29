@@ -1,41 +1,41 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 export default function Buttons(props) {
   const {
     buttonsDisable,
+    setButtonsDisable,
     colors,
     setColors,
-    clicked,
+    clickedIndex,
     completed,
     setCompleted,
   } = props;
 
-  const [total, setTotal] = useState(0);
-
   function textColor(color) {
     let colorsCopy = [...colors];
-    colorsCopy[clicked] = color;
+    colorsCopy[clickedIndex] = color;
     setColors(colorsCopy);
-    const clickedCopy = [...completed, clicked];
-    setCompleted(clickedCopy);
-    setTotal(total + 1);
+
+    const totalCompleted = [...completed, clickedIndex];
+    setCompleted(totalCompleted);
+
+    setButtonsDisable(true);
   }
 
   return (
-    <Footer>
+    <Footer data-identifier="flashcard-counter">
       <ButtonDiv>
-        <Red onClick={() => textColor("#ff3030")} disabled={buttonsDisable}>
+        <Red onClick={() => textColor("#ff3030")} disabled={buttonsDisable} data-identifier="forgot-btn">
           Não lembrei
         </Red>
-        <Yellow onClick={() => textColor("#ff922e")} disabled={buttonsDisable}>
+        <Yellow onClick={() => textColor("#ff922e")} disabled={buttonsDisable} data-identifier="almost-forgot-btn">
           Quase não lembrei
         </Yellow>
-        <Green onClick={() => textColor("#2fbe34")} disabled={buttonsDisable}>
+        <Green onClick={() => textColor("#2fbe34")} disabled={buttonsDisable} data-identifier="zap-btn">
           Zap!
         </Green>
       </ButtonDiv>
-      {total}/8 CONCLUÍDOS
+      {completed.length}/8 CONCLUÍDOS
     </Footer>
   );
 }

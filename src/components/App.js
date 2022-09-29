@@ -1,11 +1,11 @@
+import { useState } from "react";
+
 import Logo from "./Logo";
 import CardList from "./CardList";
 import Buttons from "./Buttons";
 
 import Reset from "../Reset";
 import GlobalStyle from "../globalStyles";
-
-import { useState } from "react";
 
 export default function App() {
   const [buttonsDisable, setButtonsDisable] = useState(true);
@@ -19,7 +19,7 @@ export default function App() {
     "##333333",
     "##333333",
   ]);
-  const [clicked, setClicked] = useState();
+  const [clickedIndex, setClickedIndex] = useState();
   const [completed, setCompleted] = useState([]);
 
   return (
@@ -30,15 +30,16 @@ export default function App() {
       <CardList
         setButtonsDisable={setButtonsDisable}
         colors={colors}
-        clicked={clicked}
-        setClicked={setClicked}
+        clickedIndex={clickedIndex}
+        setClickedIndex={setClickedIndex}
         completed={completed}
       />
       <Buttons
         buttonsDisable={buttonsDisable}
+        setButtonsDisable={setButtonsDisable}
         colors={colors}
         setColors={setColors}
-        clicked={clicked}
+        clickedIndex={clickedIndex}
         completed={completed}
         setCompleted={setCompleted}
       />

@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import Card from "./Card";
 import { useState } from "react";
 
+import Card from "./Card";
+
 export default function CardList(props) {
-  const { setButtonsDisable, colors, clicked, setClicked, completed } = props;
+  const { setButtonsDisable, colors, clickedIndex, setClickedIndex, completed } = props;
 
   const deck = [
     {
@@ -61,8 +62,8 @@ export default function CardList(props) {
           disabled={disabled}
           setDisabled={setDisabled}
           setButtonsDisable={setButtonsDisable}
-          clicked={clicked}
-          setClicked={setClicked}
+          clickedIndex={clickedIndex}
+          setClickedIndex={setClickedIndex}
           completed={completed}
         />
       ))}
